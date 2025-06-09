@@ -1,0 +1,206 @@
+---
+title: Language Translation at Scale {{< iconify fluent-emoji-flat:bookmark-tabs >}}
+author: Frank Aragona
+format: 
+    revealjs: 
+        theme: [default, styles.scss]
+        width: 1500
+knitr: true
+lightbox: true
+execute: 
+  echo: true
+  cache: true
+---
+
+## Quarto Documents
+
+- reports or publications with embedded code 
+- automated and parameterized reports
+- may need to translate the _text_ (not the _code_)
+
+:::{.notes}
+- say i have a report that gets updated weekly
+- it may have code that makes tables and figures, and text of course
+- if i need to translate the text into different languages i will need to avoid translating the _code_ chunks because they can _only_ be output to english or else they wont work
+- so i need a way to only extract the text of my markdown document
+:::
+
+## Steps to Automatically Translate 
+
+1. extract the text from the .qmd/.rmd file
+2. apply translation api to the extracted text
+3. insert the new text back into the .qmd/.rmd
+
+:::{.notes}
+- so, we need to extract the text only,
+- apply a translation api to the text - this is where you could use a model to do something other than translation with the text
+- and finally knit the text back into a markdown file where it can be rendered
+:::
+
+## Extract the Text
+
+```{css, echo=FALSE}
+.watch {
+  background-color: lightpurple;
+  border: 3px solid purple;
+  font-weight: bold;
+}
+/* 
+.box-output {
+  border-radius: 5px;
+  padding: 30px;
+  margin: 20px; 
+  border-style: solid;
+  border-width: 3px;
+  border-color: purple;
+  font-family: 'JetBrains Mono';
+  font-weight: bold;
+} */
+```
+
+::::{.columns}
+
+:::{.column width="40%"}
+- [lightparser R package](https://thinkr-open.github.io/lightparser/)
+- distinguishes the code chunks from the text
+- turns your .qmd/.rmd into a dataframe
+:::
+
+:::{.column width="60%"}
+```{r}
+#| class-output: watch
+use("lightparser")
+
+(parsed <- lightparser::split_to_tbl('_english.qmd'))
+```
+:::
+
+::::
+
+:::{.notes}
+- lightparser is great for extracting text
+- it turns your markdown file into a dataframe
+- it breaks down the file into different components,
+- such as text and code chunks
+:::
+
+## Translate 
+
+::::{.columns}
+
+:::{.column width="40%"}
+
+- can use whichever translation api
+- [huggingface transformers](https://huggingface.co/docs/transformers/tasks/translation)
+- [huggingfaceR package](https://github.com/farach/huggingfaceR)
+- [translatemd package](https://github.com/edenian-prince/translatemd) for this demo
+
+:::
+
+:::{.column width="60%"}
+
+```{r}
+#| include: false
+use("translatemd")
+use("reticulate")
+
+translatemd::require_transformers()
+transformers <- reticulate::import("transformers")
+
+translator <- translatemd::select_lang("Helsinki-NLP/opus-mt-en-es")
+
+
+```
+
+```{r}
+parsed_es <- parsed |>
+  tidyr::unnest(cols = text) |>
+  dplyr::mutate(text_es = 
+    purrr::map(text,translatemd::translate)
+  )
+```
+
+```{r}
+#| class-output: watch
+#| echo: false
+parsed_es |>
+  tidyr::unnest(cols = text_es) |>
+  dplyr::select(type,text_es) |>
+  head()
+```
+
+:::
+
+::::
+
+:::{.notes}
+- now we can apply a translation model to our text
+- im using a model i found on huggingface 
+- huggingface has open source models for all sorts of "AI" tasks
+:::
+
+## Convert Back to Quarto
+
+::::{.columns}
+
+
+:::{.column width="40%"}
+- lightparser 
+- convert the new dataframe into a .qmd/.rmd file
+- `quarto render ...`
+:::
+
+:::{.column width="60%"}
+
+```{r}
+#| eval: false
+# output to qmd
+lightparser::combine_tbl_to_file(
+  parsed_es_to_qmd,
+  "_spanish.qmd"
+)
+```
+
+:::
+
+::::
+
+:::{.notes}
+- Now lightparser can easily knit the translated dataframe back into a markdown file
+- and we can render that file 
+:::
+
+## Result
+
+:::{.column-screen-inset-shaded layout-nrow="1"}
+
+![](images/english.png){.myframe}
+
+![](images/spanish.png){.myframe}
+
+
+:::
+
+:::{.notes}
+- and now we have a document in english and another in spanish
+:::
+
+## More Ideas?
+
+- text to speech
+- text summarization
+- ?
+
+:::{.notes}
+- I hope this gets people to think about doing more with their quarto or rmarkdown documents
+- I want to explore text to speech models, or maybe even speech to text models
+- there are really cool NLP models for text summarization; say you have a giant document and want to hand someone a high level condensed version, this would be a great tool for the task!
+
+:::
+
+## Links
+
+- [blog](https://edenian-prince.github.io/blog/posts/2024-08-21-translate-md-files/)
+- [presentation repo]()
+
+

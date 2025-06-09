@@ -1,0 +1,195 @@
+/*-- scss:defaults --*/
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #f0f0f0;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+
+// $primary: #440154ff;
+$primary: #fdfdfd;
+$secondary: #062a4a;
+$tertiary: rgb(92, 170, 63);
+
+$theme-white: #F7F8F9;
+$theme-yellow: #E8D4AD;
+$theme-darksand: #D0927D;
+$theme-night: #060708;
+$theme-ground: #416270;
+
+// water secondary 
+$water1: #48BDF3;
+$water2: #1E6CB2;
+$water3: #184C86;
+$water0: #F2F2F2;
+
+// water main
+$theme-water: #dae9f9;
+$theme-watershadow: #C6DFF9;
+$theme-ocean: #051525;
+
+// navbar text
+// $navbar-fg: #f5eff6;
+$navbar-fg: $theme-night;
+$light-bg: #f8f5f9;
+$link-color: $tertiary; 
+// #051525;
+
+// fonts
+// $font-family-sans-serif: 'JetBrains Mono', sans-serif;
+// $presentation-heading-font: 'JetBrains Mono', serif;
+
+// fonts
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+@import url('https://rsms.me/inter/inter.css');
+
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter var', sans-serif; }
+}
+
+$font-family-sans-serif: 'Atkinson Hyperlegible', sans-serif;
+
+
+
+
+
+/*-- scss:rules --*/
+
+// :root {
+//     --bs-body-font-family: 'Atkinson Hyperlegible';
+//     --bs-body-font-size: 21px;
+//   }
+
+//   .reveal h1, h2, h3, p {
+//     --bs-body-font-family: 'Atkinson Hyperlegible';
+//     --bs-body-font-size: 21px;
+//   }
+
+// remove the gap at the start of the page
+main {
+	margin-top: 0em;
+	margin-bottom: 1em;
+}
+
+.v-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+  // font-family: JetBrains Mono;
+  font-size: 70px;
+}
+
+#title-block-header {
+
+	margin-top: -20px;
+}
+
+// for links
+ /* unvisited link */
+ a:link {
+    color: rgb(59, 3, 110);
+  }
+  
+  /* visited link */
+  a:visited {
+    color: rgb(13, 0, 128);
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: hotpink;
+  }
+  
+  /* selected link */
+  a:active {
+    color: blue;
+  } 
+
+
+pre code.sourceCode {
+  padding-left: 0;
+  font-family: "JetBrains Mono", monospace;
+}
+
+// Output colors
+.watch {
+  background-color: lightpurple;
+  border: 3px solid purple;
+  font-weight: bold;
+}
+
+.smallframe {
+  /*box-shadow: $back-blue 10px 5px 5px 0px;*/
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  width: 400px;
+  /*margin: auto !important;*/
+  
+}
+
+.medframe {
+  /*box-shadow: $back-blue 10px 5px 5px 0px;*/
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  width: 915px;
+  /*margin: auto !important;*/
+  
+}
+
+
+.myframe {
+  /*box-shadow: $back-blue 10px 5px 5px 0px;*/
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  /*margin: auto !important;*/
+  
+}
+
+.myframe2 {
+  /*box-shadow: $back-blue 10px 5px 5px 0px;*/
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px !important;
+  box-shadow: 0 20px 47px rgb(0 0 0 / 55%);
+  /*width: fit-content;*/
+  /*margin: auto !important;*/
+}
+
+.pic-border{
+    border: 5px solid black;
+    padding: 5px;
+}
+
+// box around splash options
+.box {
+  border-radius: 5px;
+  // box-shadow: 0px 30px 40px -20px var(--grayishBlue);
+  padding: 30px;
+  margin: 20px; 
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+  font-family: 'JetBrains Mono';
+  font-size: 20px;
+}
