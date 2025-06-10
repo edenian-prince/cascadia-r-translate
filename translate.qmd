@@ -1,6 +1,6 @@
 ---
-title: Language Translation at Scale {{< iconify fluent-emoji-flat:bookmark-tabs >}}
-author: Frank Aragona
+# title: Language Translation at Scale {{< iconify fluent-emoji-flat:bookmark-tabs >}}
+# author: Frank Aragona
 format: 
     revealjs: 
         theme: [default, styles.scss]
@@ -12,11 +12,19 @@ execute:
   cache: true
 ---
 
-## Quarto Documents
+#  Language Translation <br> at Scale {{< iconify fluent-emoji-flat:bookmark-tabs >}} {.custom-title}
 
-- reports or publications with embedded code 
-- automated and parameterized reports
-- may need to translate the _text_ (not the _code_)
+Frank Aragona
+
+<br> 
+
+{{< qrcode https://edenian-prince.github.io/blog/posts/2024-08-21-translate-md-files/ >}}
+
+## the goal
+
+- we need to automate writing a report or publication
+- we're using markdown (quarto or rmarkdown)
+- we need to translate the **text** (not the **`code`**)
 
 :::{.notes}
 - say i have a report that gets updated weekly
@@ -25,11 +33,11 @@ execute:
 - so i need a way to only extract the text of my markdown document
 :::
 
-## Steps to Automatically Translate 
+## steps to automatically translate
 
-1. extract the text from the .qmd/.rmd file
-2. apply translation api to the extracted text
-3. insert the new text back into the .qmd/.rmd
+1. extract the text from the `.qmd`/`.rmd` file
+2. apply translation model to the extracted text
+3. insert the new text back into the `.qmd`/`.rmd`
 
 :::{.notes}
 - so, we need to extract the text only,
@@ -37,7 +45,7 @@ execute:
 - and finally knit the text back into a markdown file where it can be rendered
 :::
 
-## Extract the Text
+## step 1: extract the text
 
 ```{css, echo=FALSE}
 .watch {
@@ -63,7 +71,7 @@ execute:
 :::{.column width="40%"}
 - [lightparser R package](https://thinkr-open.github.io/lightparser/)
 - distinguishes the code chunks from the text
-- turns your .qmd/.rmd into a dataframe
+- turns your `.qmd`/`.rmd` into a dataframe
 :::
 
 :::{.column width="60%"}
@@ -84,7 +92,7 @@ use("lightparser")
 - such as text and code chunks
 :::
 
-## Translate 
+## step 2: translate 
 
 ::::{.columns}
 
@@ -139,14 +147,14 @@ parsed_es |>
 - huggingface has open source models for all sorts of "AI" tasks
 :::
 
-## Convert Back to Quarto
+## step 3: convert back to quarto
 
 ::::{.columns}
 
 
 :::{.column width="40%"}
 - lightparser 
-- convert the new dataframe into a .qmd/.rmd file
+- convert the new dataframe into a `.qmd`/`.rmd` file
 - `quarto render ...`
 :::
 
@@ -170,7 +178,7 @@ lightparser::combine_tbl_to_file(
 - and we can render that file 
 :::
 
-## Result
+## 
 
 :::{.column-screen-inset-shaded layout-nrow="1"}
 
@@ -185,7 +193,7 @@ lightparser::combine_tbl_to_file(
 - and now we have a document in english and another in spanish
 :::
 
-## More Ideas?
+## more ideas?
 
 - text to speech
 - text summarization
@@ -198,9 +206,10 @@ lightparser::combine_tbl_to_file(
 
 :::
 
-## Links
+## links
 
 - [blog](https://edenian-prince.github.io/blog/posts/2024-08-21-translate-md-files/)
-- [presentation repo]()
+- [presentation repo](https://github.com/edenian-prince/cascadia-r-translate)
+- {{< qrcode https://edenian-prince.github.io/blog/posts/2024-08-21-translate-md-files/ >}}
 
 
