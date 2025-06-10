@@ -8,14 +8,14 @@
 <link href="translate_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="translate_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="translate_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="translate_files/libs/quarto-contrib/qrcodejs-v1.0.0/qrcode.js"></script>
 <script src="translate_files/libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script src="translate_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="translate_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="translate_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <meta name="author" content="Frank Aragona">
-  <title>Language Translation at Scale </title>
+  <title>translate</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,24 +394,29 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Language Translation at Scale <iconify-icon role="img" inline="" icon="fluent-emoji-flat:bookmark-tabs" aria-label="Icon bookmark-tabs from fluent-emoji-flat Iconify.design set." title="Icon bookmark-tabs from fluent-emoji-flat Iconify.design set."></iconify-icon></h1>
 
-<div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-Frank Aragona 
-</div>
-</div>
-</div>
-
+<section>
+<section id="language-translation-at-scale" class="title-slide slide level1 custom-title center">
+<h1>Language Translation <br> at Scale <iconify-icon role="img" inline="" icon="fluent-emoji-flat:bookmark-tabs" aria-label="Icon bookmark-tabs from fluent-emoji-flat Iconify.design set." title="Icon bookmark-tabs from fluent-emoji-flat Iconify.design set."></iconify-icon></h1>
+<p>Frank Aragona</p>
+<p><br></p>
+<div id="" class="qrcode"></div>
+<script type="text/javascript">
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorDark":"#000000","text":"https://edenian-prince.github.io/blog/posts/2024-08-21-translate-md-files/","colorLight":"#ffffff","height":128,"width":128});
+  script.remove();
+})();
+</script>
+    
 </section>
-<section id="quarto-documents" class="slide level2">
-<h2>Quarto Documents</h2>
+<section id="the-goal" class="slide level2">
+<h2>the goal</h2>
 <ul>
-<li>reports or publications with embedded code</li>
-<li>automated and parameterized reports</li>
-<li>may need to translate the <em>text</em> (not the <em>code</em>)</li>
+<li>we need to automate writing a report or publication</li>
+<li>we’re using markdown (quarto or rmarkdown)</li>
+<li>we need to translate the <strong>text</strong> (not the <strong><code>code</code></strong>)</li>
 </ul>
 <aside class="notes">
 <ul>
@@ -433,11 +438,11 @@ Frank Aragona
       }</style></aside>
 </section>
 <section id="steps-to-automatically-translate" class="slide level2">
-<h2>Steps to Automatically Translate</h2>
+<h2>steps to automatically translate</h2>
 <ol type="1">
-<li>extract the text from the .qmd/.rmd file</li>
-<li>apply translation api to the extracted text</li>
-<li>insert the new text back into the .qmd/.rmd</li>
+<li>extract the text from the <code>.qmd</code>/<code>.rmd</code> file</li>
+<li>apply translation model to the extracted text</li>
+<li>insert the new text back into the <code>.qmd</code>/<code>.rmd</code></li>
 </ol>
 <aside class="notes">
 <ul>
@@ -457,8 +462,8 @@ Frank Aragona
           display:block!important;
       }</style></aside>
 </section>
-<section id="extract-the-text" class="slide level2">
-<h2>Extract the Text</h2>
+<section id="step-1-extract-the-text" class="slide level2">
+<h2>step 1: extract the text</h2>
 <div class="cell">
 <style type="text/css">
 .watch {
@@ -484,7 +489,7 @@ Frank Aragona
 <ul>
 <li><a href="https://thinkr-open.github.io/lightparser/">lightparser R package</a></li>
 <li>distinguishes the code chunks from the text</li>
-<li>turns your .qmd/.rmd into a dataframe</li>
+<li>turns your <code>.qmd</code>/<code>.rmd</code> into a dataframe</li>
 </ul>
 </div><div class="column" style="width:60%;">
 <div class="cell">
@@ -525,8 +530,8 @@ Frank Aragona
           display:block!important;
       }</style></aside>
 </section>
-<section id="translate" class="slide level2">
-<h2>Translate</h2>
+<section id="step-2-translate" class="slide level2">
+<h2>step 2: translate</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
@@ -575,13 +580,13 @@ Frank Aragona
           display:block!important;
       }</style></aside>
 </section>
-<section id="convert-back-to-quarto" class="slide level2">
-<h2>Convert Back to Quarto</h2>
+<section id="step-3-convert-back-to-quarto" class="slide level2">
+<h2>step 3: convert back to quarto</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
 <ul>
 <li>lightparser</li>
-<li>convert the new dataframe into a .qmd/.rmd file</li>
+<li>convert the new dataframe into a <code>.qmd</code>/<code>.rmd</code> file</li>
 <li><code>quarto render ...</code></li>
 </ul>
 </div><div class="column" style="width:60%;">
@@ -610,8 +615,8 @@ Frank Aragona
           display:block!important;
       }</style></aside>
 </section>
-<section id="result" class="slide level2">
-<h2>Result</h2>
+<section id="section" class="slide level2">
+<h2></h2>
 <div>
 
 </div>
@@ -642,7 +647,7 @@ Frank Aragona
       }</style></aside>
 </section>
 <section id="more-ideas" class="slide level2">
-<h2>More Ideas?</h2>
+<h2>more ideas?</h2>
 <ul>
 <li>text to speech</li>
 <li>text summarization</li>
@@ -667,17 +672,27 @@ Frank Aragona
       }</style></aside>
 </section>
 <section id="links" class="slide level2">
-<h2>Links</h2>
+<h2>links</h2>
 <ul>
 <li><a href="https://edenian-prince.github.io/blog/posts/2024-08-21-translate-md-files/">blog</a></li>
-<li><a href="">presentation repo</a></li>
+<li><a href="https://github.com/edenian-prince/cascadia-r-translate">presentation repo</a></li>
+<li><div id="" class="qrcode"></div>
+<script type="text/javascript">
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorDark":"#000000","text":"https://edenian-prince.github.io/blog/posts/2024-08-21-translate-md-files/","colorLight":"#ffffff","height":128,"width":128});
+  script.remove();
+})();
+</script>
+    </li>
 </ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -1113,7 +1128,7 @@ Frank Aragona
       }
     });
     </script>
-    <script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
+    <script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","descPosition":"bottom","loop":false,"closeEffect":"zoom"});
     (function() {
       let previousOnload = window.onload;
       window.onload = () => {
